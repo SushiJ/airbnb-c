@@ -3,6 +3,7 @@ import Footer from "../components/Footer";
 import { useRouter } from "next/dist/client/router";
 import { format } from "date-fns";
 import InfoCard from "../components/InfoCard";
+import Map from "../components/Map";
 
 function Search({ searchResults }) {
   const router = useRouter();
@@ -15,7 +16,7 @@ function Search({ searchResults }) {
   return (
     <div className="h-screen">
       <Header placeholder={`${location} | ${range} | ${numberOfGuests}`} />
-      <main>
+      <main className="flex">
         <section className="flex-grow px-6 pt-14">
           <p className="text-xs">
             300+ stays {range} for {numberOfGuests} guests
@@ -30,7 +31,7 @@ function Search({ searchResults }) {
             <p className="button">Rooms and Beds</p>
             <p className="button">More filters</p>
           </div>
-          <div className="flex flex-col ">
+          <div className="flex flex-col">
             {searchResults.map(
               ({ img, location, title, description, star, price, total }) => (
                 <InfoCard
@@ -46,6 +47,10 @@ function Search({ searchResults }) {
               )
             )}
           </div>
+        </section>
+        <section className="hidden xl:inline-flex xl:min-w-[600px]">
+          <Map searchResults={searchResults} />
+          {console.log("map should be here bruh")}
         </section>
       </main>
       <Footer />
